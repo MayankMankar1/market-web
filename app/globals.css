@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+:root {
+  /* darkroom palette — warm near-black, restless amber, settled teal */
+  --bg: #12100e;
+  --bg-raised: #1c1917;
+  --border: #2b2622;
+  --border-soft: #211d1a;
+
+  --text: #f3eee6;
+  --text-dim: #a79e92;
+  --text-faint: #6f6a61;
+
+  --unsettled: #e8623d; /* restless — mutations/network/animation still active */
+  --settled: #2dd4bf; /* calm — everything has gone quiet */
+  --settled-dim: #1a3d38;
+  --unsettled-dim: #3d2a20;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-raised: var(--bg-raised);
+  --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
+  --color-text: var(--text);
+  --color-text-dim: var(--text-dim);
+  --color-text-faint: var(--text-faint);
+  --color-unsettled: var(--unsettled);
+  --color-settled: var(--settled);
+  --color-settled-dim: var(--settled-dim);
+  --color-unsettled-dim: var(--unsettled-dim);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.font-mono-ui {
+  font-family: var(--font-mono), monospace;
+}
+
+/* ---- signature: the settle sequence ---- */
+/* Three signals go from restless (amber, jittering) to settled (teal, still),
+   staggered, then the shutter flashes. Loops forever, ~7s cycle. */
+
+@keyframes settle-dot {
+  0%, 40% {
+    background-color: var(--unsettled);
+    box-shadow: 0 0 0 0 rgba(232, 98, 61, 0.35);
+  }
+  46%, 100% {
+    background-color: var(--settled);
+    box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.12);
+  }
+}
+
+@keyframes settle-jitter {
+  0%, 4%, 8%, 12%, 16%, 20%, 24%, 28%, 32%, 36% {
+    transform: translateX(0px);
+  }
+  2% { transform: translateX(-1.5px); }
+  6% { transform: translateX(1.5px); }
+  10% { transform: translateX(-1px); }
+  14% { transform: translateX(1px); }
+  18% { transform: translateX(-1.5px); }
+  22% { transform: translateX(1.5px); }
+  26% { transform: translateX(-1px); }
+  30% { transform: translateX(1px); }
+  34% { transform: translateX(-0.5px); }
+  40%, 100% { transform: translateX(0px); }
+}
+
+@keyframes settle-label {
+  0%, 40% { color: var(--unsettled); }
+  46%, 100% { color: var(--settled); }
+}
+
+@keyframes shutter-flash {
+  0%, 60% { opacity: 0; }
+  63% { opacity: 1; }
+  68%, 100% { opacity: 0; }
+}
+
+@keyframes frame-reveal {
+  0%, 62% { filter: blur(6px) saturate(0.7); opacity: 0.55; }
+  70%, 100% { filter: blur(0px) saturate(1); opacity: 1; }
+}
+
+.settle-dot { animation: settle-jitter 7s ease-in-out infinite, settle-dot 7s ease-in-out infinite; }
+.settle-dot--delay-1 { animation-delay: 0s, 0s; }
+.settle-dot--delay-2 { animation-delay: 0s, 0.7s; }
+.settle-dot--delay-3 { animation-delay: 0s, 1.4s; }
+
+.settle-label--delay-1 { animation: settle-label 7s ease-in-out infinite; animation-delay: 0s; }
+.settle-label--delay-2 { animation: settle-label 7s ease-in-out infinite; animation-delay: 0.7s; }
+.settle-label--delay-3 { animation: settle-label 7s ease-in-out infinite; animation-delay: 1.4s; }
+
+.shutter-flash { animation: shutter-flash 7s ease-in-out infinite; }
+.frame-reveal { animation: frame-reveal 7s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .settle-dot,
+  .settle-label--delay-1,
+  .settle-label--delay-2,
+  .settle-label--delay-3,
+  .shutter-flash,
+  .frame-reveal {
+    animation: none !important;
+  }
+  .settle-dot { background-color: var(--settled) !important; }
+  .settle-label--delay-1,
+  .settle-label--delay-2,
+  .settle-label--delay-3 {
+    color: var(--settled) !important;
+  }
+  .frame-reveal { filter: none !important; opacity: 1 !important; }
+}
