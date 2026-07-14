@@ -168,7 +168,7 @@ export default function Home() {
             <div className="rounded-2xl border border-settled/40 bg-settled-dim/30 p-8">
               <h3 className="font-display text-[20px] text-text">Pro</h3>
               <p className="mt-1 font-mono-ui text-[13px] text-settled">
-                $5 / 3 months
+                $5 / 1 month
               </p>
               <ul className="mt-6 space-y-3 text-[14px] leading-relaxed text-text-dim">
                 {[

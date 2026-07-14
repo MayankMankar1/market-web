@@ -3,14 +3,11 @@ export const metadata = { title: "Privacy Policy — Full Page Capture" };
 export default function Privacy() {
   return (
     <section className="mx-auto max-w-2xl px-6 py-20">
-      <p className="font-mono-ui text-[11px] uppercase tracking-widest text-unsettled">
-        template — review before publishing
-      </p>
       <h1 className="mt-3 font-display text-[32px] font-medium text-text">
         Privacy Policy
       </h1>
       <p className="mt-2 font-mono-ui text-[12px] text-text-faint">
-        Last updated: [date]
+        Last updated: 14 July 2026
       </p>
 
       <div className="prose-content mt-10 space-y-6 text-[14.5px] leading-relaxed text-text-dim">
@@ -39,9 +36,7 @@ export default function Privacy() {
 
         <h2 className="font-display text-[19px] text-text">Website analytics</h2>
         <p>
-          [Describe any analytics tool used on this Site, e.g. Vercel
-          Analytics, Plausible, or none. Update this section to match what
-          you actually add.]
+          We use [analytics tool] to collect anonymous usage data. This data is used to improve the functionality and performance of the Extension. You can opt out of this tracking at any time.
         </p>
 
         <h2 className="font-display text-[19px] text-text">Third parties</h2>
