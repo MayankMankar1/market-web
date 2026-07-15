@@ -4,13 +4,13 @@ export default function Terms() {
   return (
     <section className="mx-auto max-w-2xl px-6 py-20">
       <p className="font-mono-ui text-[11px] uppercase tracking-widest text-unsettled">
-        template — review before publishing
+        Full Page Capture
       </p>
       <h1 className="mt-3 font-display text-[32px] font-medium text-text">
         Terms of Service
       </h1>
       <p className="mt-2 font-mono-ui text-[12px] text-text-faint">
-        Last updated: [date]
+        Last updated: 14-july 2026
       </p>
 
       <div className="prose-content mt-10 space-y-6 text-[14.5px] leading-relaxed text-text-dim">
