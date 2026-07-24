@@ -18,8 +18,15 @@ const DODO_BASE =
     : "https://test.dodopayments.com";
 
 function corsHeaders(origin) {
-  const allowed = process.env.ALLOWED_EXTENSION_ORIGIN;
-  const allowOrigin = allowed && origin === allowed ? origin : allowed || "";
+  // ALLOWED_EXTENSION_ORIGIN can be a single origin or a comma-separated
+  // list (e.g. published ID + local unpacked dev ID), so you don't have
+  // to swap the env var every time you switch between testing a locally
+  // loaded copy and the real published extension.
+  const allowedList = (process.env.ALLOWED_EXTENSION_ORIGIN || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const allowOrigin = allowedList.includes(origin) ? origin : "";
   return {
     "Access-Control-Allow-Origin": allowOrigin,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
